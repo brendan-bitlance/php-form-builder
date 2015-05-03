@@ -6,7 +6,7 @@
  * @author Brendan Markham
  * @copyright 2015
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
- * @version	0.0.1
+ * @version 0.0.1
  */
 
 namespace Form;
