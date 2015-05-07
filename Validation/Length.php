@@ -18,6 +18,12 @@ class Length extends AbstractValidation
 	{
 		$min_exists = !is_null($min);
 		$max_exists = !is_null($max);
+		if (!$min_exists && !$max_exists) {
+			throw new \InvalidArgumentException('Min or max must contain a value');
+		}
+		if ($min_exists && $max_exists && $min > $max) {
+			throw new \InvalidArgumentException('Min cannot be greater than max');
+		}
 		if ($min_exists && !is_int($min)) {
 			throw new \InvalidArgumentException('Min must be empty or integer');
 		} else {
@@ -27,12 +33,6 @@ class Length extends AbstractValidation
 			throw new \InvalidArgumentException('Max must be empty or integer');
 		} else {
 			$this->max = $max;
-		}
-		if (!$min_exists && !$max_exists) {
-			throw new \InvalidArgumentException('Min or max must contain a value');
-		}
-		if ($min_exists && $max_exists && $min > $max) {
-			throw new \InvalidArgumentException('Min cannot be greater than max');
 		}
 		if (is_null($message)) {
 			$message = "Value must contain ";
@@ -60,10 +60,8 @@ class Length extends AbstractValidation
 	protected function is_value_valid($value)
 	{
 		$length = strlen($value);
-		if (!is_null($this->min) && $length < $this->min) {
-			return false;
-		}
-		if (!is_null($this->max) && $length > $this->max) {
+		if (	(!is_null($this->min) && $length < $this->min) ||
+				(!is_null($this->max) && $length > $this->max)) {
 			return false;
 		}
 		return true;
