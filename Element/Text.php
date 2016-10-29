@@ -1,13 +1,13 @@
 <?php
 
-namespace Form\Element;
+namespace Php\Form\Builder\Element;
 
 class Text extends Input
 {
-	const TYPE = 'text';
+    const TYPE = 'text';
 
-	public function __construct(array $attributes = array())
-	{
-		parent::__construct(self::TYPE, $attributes);
-	}
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct(self::TYPE, $attributes);
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Form\Signature;
+namespace Php\Form\Builder\Signature;
 
 interface Checkable
 { }

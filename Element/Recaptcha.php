@@ -2,33 +2,32 @@
 
 namespace Php\Form\Builder\Element;
 
-class Textarea extends Control
+class Recaptcha extends Control
 {
-    const NAME = 'textarea';
+    const NAME = 'div';
 
-    public function __construct(array $attributes = [])
+    public function __construct($key)
     {
+        $attributes = [
+            'data-sitekey' => $key
+        ];
         parent::__construct(self::NAME, parent::INNER_BLANK, $attributes);
     }
 
     public function get_default_attributes()
     {
         return [
-            'class' => 'form-control',
-            'rows' => 3,
-            'cols' => 30
+            'class' => 'g-recaptcha'
         ];
     }
 
     public function get_value()
     {
-        return $this->inner;
+        return null;
     }
 
     public function set_submitted_value($value)
     {
-        if (is_scalar($value)) {
-            $this->inner = $value;
-        }
+        return;
     }
 }

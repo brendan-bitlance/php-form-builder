@@ -2,9 +2,9 @@
 
 namespace Php\Form\Builder\Element;
 
-class Hidden extends Input
+class Tel extends Input
 {
-    const TYPE = 'hidden';
+    const TYPE = 'tel';
 
     public function __construct(array $attributes = [])
     {

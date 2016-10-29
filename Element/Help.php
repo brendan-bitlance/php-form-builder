@@ -1,20 +1,20 @@
 <?php
 
-namespace Form\Element;
+namespace Php\Form\Builder\Element;
 
 class Help extends HTML
 {
-	const NAME = 'p';
+    const NAME = 'p';
 
-	public function __construct($inner, array $attributes = array())
-	{
-		parent::__construct(self::NAME, $inner, $attributes);
-	}
+    public function __construct($inner, array $attributes = [])
+    {
+        parent::__construct(self::NAME, $inner, $attributes);
+    }
 
-	public function get_default_attributes()
-	{
-		return array(
-			'class' => 'help-block'
-		);
-	}
+    public function get_default_attributes()
+    {
+        return [
+            'class' => 'help-block'
+        ];
+    }
 }

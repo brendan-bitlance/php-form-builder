@@ -1,11 +1,11 @@
 <?php
 
-namespace Form\Signature;
+namespace Php\Form\Builder\Signature;
 
 interface Selectable
 {
-	/**
-	 * @param array $value
-	 */
-	public function mark_selected(array $value);
+    /**
+     * @param array $value
+     */
+    public function mark_selected(array $value);
 }
