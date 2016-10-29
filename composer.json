@@ -1,0 +1,24 @@
+{
+    "name": "brendan-bitlance/php-form-builder",
+    "type": "library",
+    "description": "PHP Form Builder",
+    "keywords": ["php","form","builder"],
+    "homepage": "https://github.com/brendan-bitlance/php-form-builder",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Brendan Markham",
+            "email": "brendan@bitlance.com.au",
+            "homepage": "http://bitlance.com.au",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Php\\Form\\Builder\\": ""
+        }
+    }
+}
