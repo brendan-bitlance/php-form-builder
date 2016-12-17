@@ -55,6 +55,33 @@ $form->fieldset('Contact Info')
         ->group('Shown to all other users')
         ->pair(new Element\Text(array('name' => 'preferred')), '*Preferred name:')
         ->close_fieldset();
+$form->group()
+        ->pair(new Element\Select(array(
+            'AU' => 'Australia',
+            'Rest of the World' => array(
+                'R1' => 'Asia',
+                'R2' => 'Africa',
+                'R3' => 'North America',
+                'R4' => 'South America',
+                'R5' => 'Antarctica',
+                'R6' => 'Europe'
+            ),
+            'Other Planets' => array(
+                'Very Funny' => 'Uranus'
+            )
+        ), 'AU', array('name' => 'country')), '*Country:');
+$form->group()
+        ->pair(new Element\Select(array('Lollipops', 'Chocolate', 'Milkshakes', 'Broccoli'), null, array('name' => 'interests[]', 'multiple')), 'Interests:');
+$form->fieldset(new Element\Legend('Gender', array('class' => 'flush')))
+        ->group()
+        ->pair(new Element\Radio(array('name' => 'gender', 'value' => 'M')), 'Male')
+        ->pair(new Element\Radio(array('name' => 'gender', 'value' => 'F')), 'Female')
+        ->close_fieldset();
+$form->group()
+        ->pair(new Element\Textarea(array('name' => 'bio', 'placeholder' => 'Tell us about yourself...')), 'Biography');
+$form->group('We promise not to send too much junk...')
+        ->pair(new Element\Checkbox(array('name' => 'subscribe')), 'Subscribe?')
+        ->pair(new Element\Checkbox(array('name' => 'subscribe2')), 'Subscribe Again?');
 $form->buttons(
         new Element\Button('Test A', ['name' => 'test', 'value' => 'a']),
         new Element\Button('Test B', ['name' => 'test', 'value' => 'b']),

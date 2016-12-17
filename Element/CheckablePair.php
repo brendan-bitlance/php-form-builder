@@ -19,6 +19,11 @@ class CheckablePair extends HTML implements HasControl
      */
     protected $label;
 
+    /**
+     * @var HTML
+     */
+    protected $wrapper;
+
     public function __construct(Checkable $control, $label, array $attributes = [])
     {
         if (is_null($label)) {
@@ -35,7 +40,10 @@ class CheckablePair extends HTML implements HasControl
         if (isset($this->control->id)) {
             $this->label->for = $this->control->id;
         }
-        parent::__construct(self::NAME, parent::INNER_BLANK, $attributes);
+        if (!empty($attributes)) {
+            $this->wrapper = new HTML(self::NAME, parent::INNER_BLANK, $attributes);
+        }
+        parent::__construct(self::NAME, parent::INNER_BLANK, []);
     }
 
     public function get_default_attributes()
@@ -75,4 +83,18 @@ class CheckablePair extends HTML implements HasControl
         return $output;
     }
 
+    public function generate($tabs = 0)
+    {
+        $output = "";
+        if ($this->wrapper) {
+            $output = $this->wrapper->generate_open($tabs)
+                    . PHP_EOL . $this->wrapper->generate_inner(++$tabs);
+        }
+        $output .= parent::generate($tabs);
+        if ($this->wrapper) {
+            --$tabs;
+            $output .= PHP_EOL . parent::generate_tabs($tabs) . $this->wrapper->generate_close($tabs);
+        }
+        return $output;
+    }
 }

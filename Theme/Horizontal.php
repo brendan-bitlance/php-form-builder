@@ -77,7 +77,11 @@ class Horizontal extends Builder
 
     public function pair(Element\Control $control, $label = null, array $attributes = [])
     {
-        if (!($control instanceof Checkable)) {
+        if ($control instanceof Checkable) {
+            $classString = !empty($attributes['class']) ? "{$attributes['class']} " : '';
+            $classString .= "{$this->control_class} {$this->offset_class}";
+            $attributes['class'] = $classString;
+        } else {
             $control->set_wrapper($this->wrapper);
             if (!is_null($label)) {
                 if (is_string($label)) {
