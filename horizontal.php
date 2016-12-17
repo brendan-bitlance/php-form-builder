@@ -73,13 +73,13 @@ $form->group()
 $form->group()
         ->pair(new Element\Select(array('Lollipops', 'Chocolate', 'Milkshakes', 'Broccoli'), null, array('name' => 'interests[]', 'multiple')), 'Interests:');
 $form->fieldset(new Element\Legend('Gender', array('class' => 'flush')))
-        ->group()
+        ->group_checkable()
         ->pair(new Element\Radio(array('name' => 'gender', 'value' => 'M')), 'Male')
         ->pair(new Element\Radio(array('name' => 'gender', 'value' => 'F')), 'Female')
         ->close_fieldset();
 $form->group()
         ->pair(new Element\Textarea(array('name' => 'bio', 'placeholder' => 'Tell us about yourself...')), 'Biography');
-$form->group('We promise not to send too much junk...')
+$form->group_checkable('We promise not to send too much junk...')
         ->pair(new Element\Checkbox(array('name' => 'subscribe')), 'Subscribe?')
         ->pair(new Element\Checkbox(array('name' => 'subscribe2')), 'Subscribe Again?');
 $form->buttons(

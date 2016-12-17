@@ -7,3 +7,14 @@
 div.form-group.submit {
 	margin-top: 15px;
 }
+
+/* Hacks
+   ========================================================================== */
+.form-group .checkbox:first-child,
+.form-group .radio:first-child {
+    padding-top: 0;
+}
+.form-group .checkbox + .checkbox,
+.form-group .radio + .radio {
+    margin-top: -5px;
+}

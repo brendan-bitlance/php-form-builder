@@ -15,6 +15,11 @@ class Horizontal extends Builder
     private $wrapper;
 
     /**
+     * @var Element\HTML
+     */
+    private $buffer;
+
+    /**
      * @var string
      */
     private $size;
@@ -59,29 +64,35 @@ class Horizontal extends Builder
         parent::__construct($form_attributes);
         $this->add_attribute('class', 'form-horizontal');
         $this->wrapper = new Element\HTML('div', Element\HTML::INNER_BLANK, ['class' => $this->control_class]);
+        $this->buffer = new Element\HTML('div', Element\HTML::INNER_BLANK, ['class' => "{$this->control_class} {$this->offset_class}"]);
     }
 
-    public function group($help = null, array $attributes = [])
+    public function group_checkable($help = null, array $attributes = [])
+    {
+        $buffer = $this->buffer;
+        if (is_string($help)) {
+            $help = new Element\Help($help);
+        }
+        return $this->group($help, $buffer, $attributes);
+    }
+
+    public function group($help = null, Element\HTML $buffer = null, array $attributes = [])
     {
         if (is_string($help)) {
             $help = new Element\Help($help);
             $help->add_attribute('class', "{$this->control_class} {$this->offset_class}");
         }
-        return parent::group($help, $attributes);
+        return parent::group($help, $buffer, $attributes);
     }
 
-    public function group_raw($help = null, array $attributes = [])
+    public function group_raw($help = null, Element\HTML $buffer = null, array $attributes = [])
     {
-        return parent::group($help, $attributes);
+        return parent::group($help, $buffer, $attributes);
     }
 
     public function pair(Element\Control $control, $label = null, array $attributes = [])
     {
-        if ($control instanceof Checkable) {
-            $classString = !empty($attributes['class']) ? "{$attributes['class']} " : '';
-            $classString .= "{$this->control_class} {$this->offset_class}";
-            $attributes['class'] = $classString;
-        } else {
+        if (!($control instanceof Checkable)) {
             $control->set_wrapper($this->wrapper);
             if (!is_null($label)) {
                 if (is_string($label)) {

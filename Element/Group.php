@@ -19,12 +19,18 @@ class Group extends HTML implements HasControl
      */
     protected $help;
 
-    public function __construct(array $pairs = [], $help = null, array $attributes = [])
+    /**
+     * @var HTML|null
+     */
+    protected $buffer;
+
+    public function __construct(array $pairs = [], $help = null, HTML $buffer = null, array $attributes = [])
     {
         $this->set_pairs($pairs);
         if (!is_null($help)) {
             $this->set_help($help);
         }
+        $this->buffer = $buffer;
         parent::__construct(self::NAME, parent::INNER_BLANK, $attributes);
     }
 
@@ -33,6 +39,22 @@ class Group extends HTML implements HasControl
         return [
             'class' => 'form-group'
         ];
+    }
+
+    /**
+     * @return HTML|null
+     */
+    public function get_buffer()
+    {
+        return $this->buffer;
+    }
+
+    /**
+     * @param HTML|null $buffer
+     */
+    public function set_buffer(HTML $buffer = null)
+    {
+        $this->buffer = $buffer;
     }
 
     public function add_pair($pair)
@@ -131,11 +153,20 @@ class Group extends HTML implements HasControl
 
     public function generate_inner($tabs = 0)
     {
+        $output = "";
+        if ($this->buffer) {
+            $output = PHP_EOL . $this->buffer->generate_open(++$tabs)
+                    . PHP_EOL . $this->buffer->generate_inner($tabs);
+        }
         $this->inner = $this->pairs;
         if (!is_null($this->help)) {
             $this->inner[] = $this->help;
         }
-        return parent::generate_inner($tabs);
+        $output .= parent::generate_inner($tabs);
+        if ($this->buffer) {
+            --$tabs;
+            $output .= parent::generate_tabs($tabs + 1) . $this->buffer->generate_close($tabs) . PHP_EOL;
+        }
+        return $output;
     }
-
 }
