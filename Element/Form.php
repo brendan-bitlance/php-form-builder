@@ -83,7 +83,7 @@ class Form extends HTML
                 $value = $data;
                 $depth = 0;
                 foreach ($keys as $key) {
-                    if (!empty($value[$key])) {
+                    if (array_key_exists($key, $value)) {
                         $value = $value[$key];
                     } else {
                         break;

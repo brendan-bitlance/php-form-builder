@@ -20,16 +20,22 @@ class Group extends HTML implements HasControl
     protected $help;
 
     /**
+     * @var array
+     */
+    protected $help_attributes = [];
+
+    /**
      * @var HTML|null
      */
     protected $buffer;
 
-    public function __construct(array $pairs = [], $help = null, HTML $buffer = null, array $attributes = [])
+    public function __construct(array $pairs = [], $help = null, $help_attributes = [], HTML $buffer = null, array $attributes = [])
     {
         $this->set_pairs($pairs);
         if (!is_null($help)) {
             $this->set_help($help);
         }
+        $this->help_attributes = $help_attributes;
         $this->buffer = $buffer;
         parent::__construct(self::NAME, parent::INNER_BLANK, $attributes);
     }
@@ -129,6 +135,9 @@ class Group extends HTML implements HasControl
             $this->help = $help;
         } else {
             throw new \InvalidArgumentException('Malformed help');
+        }
+        foreach ($this->help_attributes as $k => $v) {
+            $this->help->add_attribute($k, $v);
         }
     }
 

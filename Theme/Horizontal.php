@@ -67,27 +67,28 @@ class Horizontal extends Builder
         $this->buffer = new Element\HTML('div', Element\HTML::INNER_BLANK, ['class' => "{$this->control_class} {$this->offset_class}"]);
     }
 
-    public function group_checkable($help = null, array $attributes = [])
+    public function group_checkable($help = null, array $help_attributes = [], array $attributes = [])
     {
         $buffer = $this->buffer;
         if (is_string($help)) {
             $help = new Element\Help($help);
         }
-        return $this->group($help, $buffer, $attributes);
+        return $this->group($help, $help_attributes, $buffer, $attributes);
     }
 
-    public function group($help = null, Element\HTML $buffer = null, array $attributes = [])
+    public function group($help = null, array $help_attributes = [], Element\HTML $buffer = null, array $attributes = [])
     {
+        $classString = "{$this->control_class} {$this->offset_class}";
         if (is_string($help)) {
             $help = new Element\Help($help);
-            $help->add_attribute('class', "{$this->control_class} {$this->offset_class}");
+            $help->add_attribute('class', $classString);
         }
-        return parent::group($help, $buffer, $attributes);
+        return parent::group($help, $help_attributes + ['class' => $classString], $buffer, $attributes);
     }
 
-    public function group_raw($help = null, Element\HTML $buffer = null, array $attributes = [])
+    public function group_raw($help = null, array $help_attributes = [], Element\HTML $buffer = null, array $attributes = [])
     {
-        return parent::group($help, $buffer, $attributes);
+        return parent::group($help, $help_attributes, $buffer, $attributes);
     }
 
     public function pair(Element\Control $control, $label = null, array $attributes = [])

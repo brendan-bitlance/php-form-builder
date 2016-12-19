@@ -82,6 +82,9 @@ $form->group()
 $form->group_checkable('We promise not to send too much junk...')
         ->pair(new Element\Checkbox(array('name' => 'subscribe')), 'Subscribe?')
         ->pair(new Element\Checkbox(array('name' => 'subscribe2')), 'Subscribe Again?');
+$form->group_checkable()
+        ->pair(new Element\BitCheckbox(array('name' => 'should[be][easy]'), 'A'), 'A')
+        ->pair(new Element\BitCheckbox(array('name' => 'should[be][tricky]'), 'B'), 'B');
 $form->buttons(
         new Element\Button('Test A', ['name' => 'test', 'value' => 'a']),
         new Element\Button('Test B', ['name' => 'test', 'value' => 'b']),

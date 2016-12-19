@@ -77,10 +77,10 @@ class Builder
         return $this;
     }
 
-    public function group($help = null, Element\HTML $buffer = null, array $attributes = [])
+    public function group($help = null, array $help_attributes = [], Element\HTML $buffer = null, array $attributes = [])
     {
         $this->close_group();
-        $this->temp_group = new Element\Group([], $help, $buffer, $attributes);
+        $this->temp_group = new Element\Group([], $help, $help_attributes, $buffer, $attributes);
         return $this;
     }
 
