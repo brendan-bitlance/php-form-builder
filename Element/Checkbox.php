@@ -22,7 +22,7 @@ class Checkbox extends Input implements Checkable
 
     public function set_submitted_value($value)
     {
-        if (!empty($value)) {
+        if ($value == $this->__get('value')) {
             $this->checked = 'checked';
         }
     }
