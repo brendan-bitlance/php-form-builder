@@ -22,7 +22,17 @@ class Radio extends Input implements Checkable
 
     public function set_submitted_value($value)
     {
-        if ($value == $this->value) {
+        if (is_array($value)) {
+            foreach ($value as $v) {
+                if (!is_scalar($v)) {
+                    continue;
+                }
+                if (strlen($v) > 0 && $v == $this->value) {
+                    $this->checked = 'checked';
+                    break;
+                }
+            }
+        } elseif (strlen($value) > 0 && $value == $this->value) {
             $this->checked = 'checked';
         }
     }
