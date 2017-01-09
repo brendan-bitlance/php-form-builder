@@ -79,6 +79,8 @@ $form->fieldset(new Element\Legend('Gender', array('class' => 'flush')))
         ->close_fieldset();
 $form->group()
         ->pair(new Element\Textarea(array('name' => 'bio', 'placeholder' => 'Tell us about yourself...')), 'Biography');
+$form->group()
+        ->pair(new Element\DateTime(array('name' => 'time', 'value' => date('Y-m-d H:i:s'))), 'Got the date and time?');
 $form->group_checkable('We promise not to send too much junk...')
         ->pair(new Element\Checkbox(array('name' => 'subscribe')), 'Subscribe?')
         ->pair(new Element\Checkbox(array('name' => 'subscribe2')), 'Subscribe Again?');

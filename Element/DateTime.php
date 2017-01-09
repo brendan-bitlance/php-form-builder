@@ -2,9 +2,9 @@
 
 namespace Php\Form\Builder\Element;
 
-class Date extends Input
+class DateTime extends Input
 {
-    const TYPE = 'date';
+    const TYPE = 'datetime';
 
     public function __construct(array $attributes = [])
     {
