@@ -159,4 +159,11 @@ class Form extends HTML
         return parent::generate($tabs);
     }
 
+    /**
+     * @return array
+     */
+    public function get_lines()
+    {
+        return $this->inner;
+    }
 }
