@@ -93,7 +93,8 @@ $form->set_validation(array(
         new Validation\Required('We need to know who you are :/'),
         new Validation\Length(3, 16)
     ),
-    'country' => new Validation\Required()
+    'country' => new Validation\Required(),
+    'bio' => new Validation\Custom(function($value){return strlen($value) > 3;}, 'Tell us a little about yourself')
 ));
 if (!empty($_POST)) {
     $form->populate($_POST);
